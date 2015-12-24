@@ -2,7 +2,7 @@
 
 In this post, I show how to use **Map/Reduce** Module with streaming API (using Python code) to process data. In this case I make word count.
 
-**1- Create mapper and reducer files**
+**1- Create mapper and reducer files**  
 Create map file called wordcount_mapper.py
 Add the code billow
 
