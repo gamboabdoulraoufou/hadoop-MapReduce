@@ -53,6 +53,17 @@ chmod +x wordcount_mapper.py
 chmod +x wordcount_reducer.py
 ```
 
+**2- Create input data** 
+``` sh
+echo "A long time ago in a galaxy far far away" > /home/hadoop/testfile1
+echo "Another episode of Star Wars" > /home/hadoop/testfile2
+```
+
+**3- Create a directory on the HDFS file system
+``` sh
+hdfs dfs -mkdir /user/hadoop/input
+``` 
+
 Cet article est écrit en _mars 2015._  
 En ce moment la dernière version de _Spark_ etait **1.3.0**  
 
