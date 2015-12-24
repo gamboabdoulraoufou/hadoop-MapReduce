@@ -88,7 +88,7 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 **6- Check the output file to see the results**
 ``` sh
 # show list file
-hdfs dfs -ls /user/cloudera/output_new
+hdfs dfs -ls /user/hadoop/output_new
 
 # show file content
 hdfs dfs -cat /user/hadoop/output_new/part-00000
