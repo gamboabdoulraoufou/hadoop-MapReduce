@@ -59,34 +59,37 @@ echo "A long time ago in a galaxy far far away" > /home/hadoop/testfile1
 echo "Another episode of Star Wars" > /home/hadoop/testfile2
 ```
 
-**3- Create a directory on the HDFS file system
+**3- Create a directory on the HDFS file system**
 ``` sh
 hdfs dfs -mkdir /user/hadoop/input
 ``` 
 
-Cet article est écrit en _mars 2015._  
-En ce moment la dernière version de _Spark_ etait **1.3.0**  
+**4- Copy the files from local filesystem to the HDFS**
+copy files
+``` sh
+hdfs dfs -put /home/hadoop/testfile1 /user/hadoop/input
+hdfs dfs -put /home/hadoop/testfile2 /user/hadoop/input
+```
 
-**_L'article couvre les points suivants:_**
-- Installation des pré-requis
-- Installation et construction de spark
-- Lancement de spark en mode interactif (Scala et python)
-- Deploiement de spark sur un cluster Standalone avec un ou plusieurs noeud
-- Création et lancement d'une application Spark
+check
+``` sh
+hdfs dfs -ls /user/hadoop/input
+```
 
-**_Caractérisques:_**
-- 2 VM sur Google Compute Engine
-- OS: Ubuntu 12.04
-- OpenJDK 1.6.0_27
-- Scala 2.9.3
-- Maven 3.0.4
-- Python 2.7.3 
-- Git 1.7.9.5 
-  
-  
-### Installation des pré-requis
+**5- Run the Hadoop WordCount example with the input and output specified**
+``` sh
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
+   -input /user/hadoop/input \
+   -output /user/hadoop/output_new \
+   -mapper /home/hadoop/wordcount_mapper.py \
+   -reducer /home/hadoop/wordcount_reducer.py
+```
 
-**Créer un utilusateur sparkmanager**
-```sh
-sudo adduser sparkmanager # mot de passe: spark
+**6- Check the output file to see the results**
+``` sh
+# show list file
+hdfs dfs -ls /user/cloudera/output_new
+
+# show file content
+hdfs dfs -cat /user/hadoop/output_new/part-00000
 ```
