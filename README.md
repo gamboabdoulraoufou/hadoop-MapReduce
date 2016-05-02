@@ -81,7 +81,11 @@ hdfs dfs -ls /user/hadoop/input
 ```
 
 **1-5- Run the Hadoop WordCount example with the input and output specified**
+
 ``` sh
+# test the mapper and reducer python file
+echo "foo foo quux labs foo bar quux" | python wordcount_mapper.py | sort -k1,1 | python wordcount_reducer.py
+
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
    -input /user/hadoop/input \
    -output /user/hadoop/output_new \
@@ -91,9 +95,14 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 ``` sh
 hadoop jar /home/hadoop/hadoop-install/contrib/streaming/hadoop-streaming-1.2.1.jar \
    -input /user/test/input \
-   -output /user/test/output_new \
-   -mapper /home/test/wordcount_mapper.py \
-   -reducer /home/test/wordcount_reducer.py
+   -output /user/test/output_new16 \
+   -file wordcount_mapper.py -mapper 'python wordcount_mapper.py' \
+   -file wordcount_reducer.py -reducer 'python wordcount_reducer.py'
+   
+# merge results
+hadoop fs -cat /user/test/output_new16/part-* > output
+cat outpu
+
 ``` 
 
 **1-6- Check the output file to see the results**
