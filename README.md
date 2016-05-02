@@ -88,6 +88,13 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
    -mapper /home/hadoop/wordcount_mapper.py \
    -reducer /home/hadoop/wordcount_reducer.py
 ```
+``` sh
+hadoop jar /home/hadoop/hadoop-install/contrib/streaming/hadoop-streaming-1.2.1.jar \
+   -input /user/test/input \
+   -output /user/test/output_new \
+   -mapper /home/test/wordcount_mapper.py \
+   -reducer /home/test/wordcount_reducer.py
+``` 
 
 **1-6- Check the output file to see the results**
 ``` sh
